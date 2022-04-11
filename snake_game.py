@@ -18,7 +18,6 @@ class Snake:
     def add_segment(self, position):
         new_turtle = turtle.Turtle(shape="square")
         new_turtle.color("white")
-        #new_turtle.shapesize(0.5)
         new_turtle.penup()
         new_turtle.goto(position)
         self.all_turtles.append(new_turtle)
@@ -33,7 +32,6 @@ class Snake:
 
 
     def move(self):
-        global all_turtles
         for a_turtle in range(len(self.all_turtles) - 1, 0, -1):
             x_cor = self.all_turtles[a_turtle - 1].xcor()
             y_cor = self.all_turtles[a_turtle - 1].ycor()
@@ -41,6 +39,13 @@ class Snake:
         self.head.forward(20)
 
 
+    def reset(self):
+        for seg in self.all_turtles:
+            seg.goto(800, 800)
+            
+        self.all_turtles.clear()
+        self.make_turtle()
+        self.head = self.all_turtles[0]
 
 
     def up(self):

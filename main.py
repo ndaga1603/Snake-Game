@@ -18,11 +18,10 @@ snake = Snake()
 food = Food()
 
 
-
 the_game_contiinue = True
 while the_game_contiinue:
     screen.update()
-    time.sleep(0.1)    
+    time.sleep(0.1)
     snake.move()
     screen.listen()
     screen.onkey(fun=snake.up, key="")
@@ -32,20 +31,21 @@ while the_game_contiinue:
 
 # detect if snake hits a food
     if snake.all_turtles[0].distance(food) < 15:
+        scores.increase_score()
         scores.score_track()
         snake.extend_a_snake()
         food.refresh()
-        
+
 # detect wall collison
     if snake.all_turtles[0].xcor() < -280 or snake.all_turtles[0].xcor() > 280 or snake.all_turtles[0].ycor() < -280 or snake.all_turtles[0].ycor() > 280:
-       the_game_contiinue = False
-       scores.game_over()
+       snake.reset()
+       scores.reset()
 
 
 # detect collision with tail
     for turtle in snake.all_turtles[1:]:
         if snake.head.distance(turtle) < 10:
-            the_game_contiinue = False
-            scores.game_over()
+            scores.reset()
+            
 
 screen.exitonclick()
